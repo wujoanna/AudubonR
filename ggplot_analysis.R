@@ -17,7 +17,7 @@ library(dplyr)
 # It is easiest to read in a .csv file, comma-separated value
 # CSVs can be created in excel with Save As/CSV.
 
-# Example (thanks to Corrie Folsom-O'Keefe). original spreadsheet: AMOY_Corrie_orig.xlsx
+# Example (data: Corrie Folsom-O'Keefe, Elizabeth Amendola). original spreadsheet: AMOY_Corrie_orig.xlsx
 # Manipulated, saved as csv: amoy_wide.csv
 
 # Set the working directory, where you'll be reading and writing files.
