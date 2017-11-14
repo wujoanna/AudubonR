@@ -51,9 +51,9 @@ AMOY_copy <- AMOY_copy[AMOY_copy@data$year==2017, ] # only include records from 
 AMOY_copy[is.na(AMOY_copy@data$fledglings)] <- 0 # fill in NAs in the fledglings field as zeros
 AMOY_copy <- AMOY_copy[AMOY_copy@data$fledglings > 0, ] 
 
-# how would you subset the dataset to only include records within 1 mile of the coastline?
+# how would you subset the dataset to only include sites with more than 1 mile of coastline?
 # hint: fill in the blanks below...
-# AMOY_copy <- AMOY_copy[AMOY_copy@data$__ < __, ]
+# AMOY_copy <- AMOY_copy[AMOY_copy@data$__ > __, ]
 
 
 
