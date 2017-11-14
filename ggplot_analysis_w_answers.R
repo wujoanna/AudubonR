@@ -27,7 +27,7 @@ setwd('C:/Users/jwu/Documents/GitHub/AudubonR')
 
 # Relative file path: 
 # two dots mean go up a level in the directory.
-setwd('../../../Box Sync/9_Admin_Conservation_Science/R series') # Or wherever you've put your files.
+setwd('../../../Box Sync/9_Admin_Conservation_Science/R series/spatial_data_for_R_tutorial') # Or wherever you've put your files.
 
 # Single dot: access files within the working directory "./file.csv" (I usually don't use)
 # The top of console shows your working directory.
