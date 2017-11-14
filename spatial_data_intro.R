@@ -7,7 +7,7 @@
 #                                         #
 ###########################################
 
-setwd(dir="C:/Users/ltaylor/Documents/GIS_Data/R/")
+setwd(dir="C:/Users/ltaylor/Box Sync/9_Admin_Conservation_Science/R series/spatial_data_for_R_tutorial")
 
 library(rgdal)
 
@@ -18,7 +18,7 @@ states <- readOGR(dsn="ne_50m_usa.shp", # dsn = full folder path to file, includ
 # writing out
 writeOGR(obj=states, 
          dsn="ne_50m_usa_copy.shp", 
-         layer="ne_50m_usa", 
+         layer="ne_50m_usa_copy", 
          driver="ESRI Shapefile")
 
 library(raster)
@@ -44,10 +44,6 @@ AMOY <- read.csv(file="amoy.csv", stringsAsFactors=FALSE)
 AMOY <- SpatialPointsDataFrame(coords=cbind(AMOY$long, AMOY$lat), # create coordinates from numeric matrix of points
                                data=AMOY, # add data frame of attribute data
                                proj4string=CRS("+proj=longlat +ellps=WGS84")) # specify spatial reference system
-
-# what is the extent (min and max of x and y) of the AMOY SpatialPointsDataFrame?
-# hint: bbox(AMOY) gives the extent of this object
-
 
 # subsetting by attributes
 AMOY_copy <- AMOY # copy data into a new object
@@ -116,6 +112,7 @@ points(x=AMOY,
 
 # read in landcover data
 landcover <- raster("CEC_landcover_2010.tif")
+plot(landcover)
 
 # do the spatial reference systems of the landcover and AMOY datasets match?
 # hint: crs(AMOY) and crs(landcover) give the spatial reference systems of these objects
@@ -128,10 +125,10 @@ lc_cropped <- crop(x=landcover, y=bbox(AMOY))
 plot(lc_cropped)
 
 # save cropped raster
-writeRaster(lc_cropped, "CEC_landcover_2010_crop_to_AMOY.tif")
+writeRaster(x=lc_cropped, filename="CEC_landcover_2010_crop_to_AMOY.tif")
 
 # extract landcover values at points
-AMOY.lc <- extract(landcover, AMOY, method="simple")
+AMOY.lc <- extract(x=landcover, y=AMOY, method="simple")
 AMOY@data <- cbind(AMOY@data, AMOY.lc) # bind extracted values back into AMOY data
 
 # merge in classes from lookup table
@@ -141,14 +138,12 @@ table(AMOY@data$class)
 
 # how would you crop the landcover raster to match the extent of your state? (hint: be careful of spatial references here!)
 # hint: fill in the blanks below...
-# 1. subset states object to your state: my_state <- states[states@data$name==__, ]
+# 1. subset states object to your state: my_state <- states[states@data$name=="__", ]
 # 2. transform CRS of your state to match the landcover raster: my_state <- spTransform(x=__, CRSobj=__)
 # 3. crop landcover raster by your state: lc_my_state <- crop(x=__, y=bbox(__))
 
 
 
-# how would you save the new landcover raster you created?
-# hint: fill in the blanks below...
-# writeRaster(__, "CEC_landcover_my_state.tif")
+
 
 
