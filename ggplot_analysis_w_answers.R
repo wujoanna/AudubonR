@@ -115,7 +115,7 @@ ggplot(data = amoy,
 ggplot(data = amoy,
        aes(x=type, y=prod))+
   geom_point()+
-  #____________ 
+  facet_wrap(~year)
 # facet wraps breaks graph into two (or more) based on variable(s) of interest.
 # the y-axis is standardized by default to create a multi-panel figure.
 
@@ -139,7 +139,7 @@ mean.amoy <- amoy %>%
 mean.amoy
 
 p1<-ggplot(data = mean.amoy, # store this in memory as `plot1`
-       aes(x = year, y = mean.fledge)) + 
+           aes(x = year, y = mean.fledge)) + 
   geom_bar(stat='identity')+
   facet_wrap(~type)
 p1
@@ -205,7 +205,7 @@ ggsave('C:/Users/jwu/Documents/TrainingTutorials/R_for_Audubon/amoy_mean.pdf', w
 # make vectors of beach and island productivity
 beach <- amoy$fledglings[amoy$type=='Beach']
 island <- amoy$fledglings[amoy$type=='Island']
-  
+
 shapiro.test(beach) # reject the null of normal distribution
 shapiro.test(island) # reject the null of normal distribution
 # normally when you have a low p-value, you find a "significant difference."
@@ -219,12 +219,12 @@ wilcox.test(beach, island) # ranks values and infer whether distributions are si
 # YES, as Corrie and Beth suspected, mean fledgling rates are a lot higher (P<0.001) on the island than mainland!
 
 ## Challenge 3: how would you test if mean productivity (amoy$prod) differs on island vs. beach?
-beach <- # ...
-island <- # ...
-shapiro.test(# ...) 
-shapiro.test(# ...)
+beach <- amoy$prod[amoy$type=='Beach']
+island <- amoy$prod[amoy$type=='Island']
+shapiro.test(beach) 
+shapiro.test(island)
 mean(beach, na.rm=T); mean(island, na.rm=T)
-# __________________
+wilcox.test(beach, island)
 # the order in t.test() and wilcox.test() doesn't matter UNLESS you are testing for an alternative hypothesis:
 # alternative='less' or alternative='greater' (referring to the 1st element)
 
@@ -268,21 +268,21 @@ for(i in 1:4){
 
 fun.wilcox <- function(i, all) { # () enclose arguments, {} encloses function code.
   for(i in years[1:length(years)]) { # 2nd set of braces to enclose looping thru years.
-      
-      temp.b <- all[all$year==i & all$type=='Beach', 'prod'] # brackets [] enclose rows, columns
-      temp.i <- all[all$year==i & all$type=='Island', 'prod']
-      w.fun <- wilcox.test(temp.b, temp.i) # wilcox test to compare beach vs. island sites
-      
-      print(i) # tells you which year is being printed below
-      print(w.fun) # prints Wilcox test outputs.
-      
+    
+    temp.b <- all[all$year==i & all$type=='Beach', 'prod'] # brackets [] enclose rows, columns
+    temp.i <- all[all$year==i & all$type=='Island', 'prod']
+    w.fun <- wilcox.test(temp.b, temp.i) # wilcox test to compare beach vs. island sites
+    
+    print(i) # tells you which year is being printed below
+    print(w.fun) # prints Wilcox test outputs.
+    
   }
 }
 
 fun.wilcox(i=years, all=amoy) # define the arguments to run the function.
 
 # Which years were means not significantly different?
-# ......
+# 2012, 2014 (borderline), 2015.
 
 ## ------- Linear regression ------- ##
 # Regression: relating one response variable to one or more independent variables
