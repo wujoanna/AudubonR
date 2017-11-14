@@ -6,7 +6,7 @@
 # If you have any difficulties let Joanna know!
 
 install.packages(c("gapminder","tidyr","plyr","dplyr",
-                   "ggplot2"))
+                   "ggplot2","sp","rgdal","raster"))
 
 # to make sure everything installed correctly run these lines
 
@@ -15,3 +15,7 @@ library(tidyr)
 library(plyr)
 library(dplyr)
 library(ggplot2)
+library(sp)
+library(rgdal)
+library(raster)
+
