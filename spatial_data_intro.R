@@ -7,7 +7,7 @@
 #                                         #
 ###########################################
 
-setwd(dir="C:/Users/ltaylor/Box Sync/9_Admin_Conservation_Science/R series/data_for_R_tutorial2")
+setwd(dir="C:/Users/ltaylor/Box Sync/9_Admin_Conservation_Science/R series/spatial_data_for_R_tutorial")
 
 library(rgdal)
 
