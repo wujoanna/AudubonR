@@ -1,7 +1,7 @@
 
 
-# Run this Script. Highlight all and hit Run on top right.
-# It will install the packages that you need
+# Run this Script. Highlight all and hit Run on top right (or Ctrl + Enter).
+# It will install the packages that you need.
 
 # If you have any difficulties let Joanna know!
 

@@ -34,7 +34,7 @@ setwd('../../../Box Sync/9_Admin_Conservation_Science/R series') # Or wherever y
 # Within user home directory: "~/path/to/file"
 
 # Read our data, amoy.csv
-amoy<-read.csv('amoy.csv')
+amoy<-read.csv('amoy.csv', stringsAsFactors=F)
 # Best practice: work with "long" instead of "wide" data. 
 head(amoy)
 
